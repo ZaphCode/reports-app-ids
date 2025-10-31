@@ -2,16 +2,16 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
 
 type Props = {
-  onAddPress?: () => void;
+  onBackPress?: () => void;
 };
 
-export default function FeedHeader({ onAddPress }: Props) {
+export default function AddHeader({ onBackPress }: Props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Feed de Reportes</Text>
-      <TouchableOpacity onPress={onAddPress} style={styles.button}>
-        <Text style={styles.buttonText}>+ Agregar</Text>
+      <TouchableOpacity onPress={onBackPress} style={styles.button}>
+        <Text style={styles.buttonText}>← Volver</Text>
       </TouchableOpacity>
+      <Text style={styles.text}>Nuevo Reporte</Text>
     </View>
   );
 }
@@ -21,26 +21,28 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     paddingHorizontal: 20,
     paddingVertical: 14,
     minHeight: 60,
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
+    position: "relative",
   },
   text: {
     fontSize: 20,
     fontWeight: "bold",
   },
   button: {
-    backgroundColor: "#58A9FFFF",
     color: "white",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
+    position: "absolute",
+    left: 2,
   },
   buttonText: {
-    color: "white",
+    color: "#007AFF",
     fontWeight: "bold",
   },
 });
