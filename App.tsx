@@ -1,31 +1,37 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-import { useState } from "react";
 
+import ReportCtxProvider, { useReportCtx } from "./components/ReportContext";
 import FeedHeader from "./components/FeedHeader";
 import ReportList from "./components/ReportList";
 import AddReport from "./components/AddReport";
 import AddHeader from "./components/AddHeader";
 
-export default function App() {
-  const [uiScreen, setUiScreen] = useState<"feed" | "add">("feed");
+function App() {
+  const { uiScreen } = useReportCtx();
 
-  if (uiScreen === "add") {
+  if (uiScreen === "add")
     return (
       <View style={styles.container}>
-        <AddHeader onBackPress={() => setUiScreen("feed")} />
+        <AddHeader />
         <AddReport />
-        <StatusBar style="auto" />
       </View>
     );
-  }
 
   return (
     <View style={styles.container}>
-      <FeedHeader onAddPress={() => setUiScreen("add")} />
+      <FeedHeader />
       <ReportList />
-      <StatusBar style="auto" />
     </View>
+  );
+}
+
+export default function AppWrapped() {
+  return (
+    <ReportCtxProvider>
+      <App />
+      <StatusBar style="auto" backgroundColor="#fff" />
+    </ReportCtxProvider>
   );
 }
 
@@ -33,5 +39,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     marginTop: 48,
+    flex: 1,
   },
 });

@@ -1,11 +1,12 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React from "react";
+import { useReportCtx } from "./ReportContext";
 
-type Props = {
-  onBackPress?: () => void;
-};
+export default function AddHeader() {
+  const { setUiScreen } = useReportCtx();
 
-export default function AddHeader({ onBackPress }: Props) {
+  const onBackPress = () => setUiScreen("feed");
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={onBackPress} style={styles.button}>

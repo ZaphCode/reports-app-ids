@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import React from "react";
+import { useReportCtx } from "./ReportContext";
 
-type Props = {
-  onAddPress?: () => void;
-};
+export default function FeedHeader() {
+  const { setUiScreen } = useReportCtx();
 
-export default function FeedHeader({ onAddPress }: Props) {
+  const onAddPress = () => setUiScreen("add");
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Feed de Reportes</Text>

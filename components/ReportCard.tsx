@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Report } from "../data";
+import { Image } from "expo-image";
 
 type Props = {
   report: Report;
@@ -23,8 +24,20 @@ const ReportCard = ({ report }: Props) => {
       </View>
 
       <View style={styles.imageBox}>
-        <Text style={styles.emoji}>{report.imgEmoji}</Text>
-        <Text style={styles.imageText}>Imagen del reporte</Text>
+        {report.imgUrl ? (
+          <Image
+            source={{
+              uri: report.imgUrl,
+            }}
+            style={{ width: "100%", height: "100%", borderRadius: 12 }}
+            contentFit="cover"
+          />
+        ) : (
+          <>
+            <Text style={styles.emoji}>{"📷"}</Text>
+            <Text style={styles.imageText}>Imagen del reporte</Text>
+          </>
+        )}
       </View>
 
       <Text style={styles.desc}>{report.desc}</Text>
@@ -83,6 +96,7 @@ const styles = StyleSheet.create({
   },
   location: {
     fontSize: 12,
+    maxWidth: 200,
     color: "#6b7280",
   },
   date: {
